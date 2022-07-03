@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>awwwards style button hover effect</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="cursor">
+        <div class="cursor__inner"></div>
+      </div>
+
+      <a href="#" class="button" cursor-class="overlay">
+        <span class="button-text"> Hover </span>
+
+        <span class="button-text foreground-text"> Swipe </span>
+      </a>
+    </div>
+    <script>
+      const cursor = document.querySelector("#cursor");
+
+      let mouse = { x: -100, y: -100 }; // place it outside
+      let pos = { x: 0, y: 0 };
+      const speed = 0.1;
+
+      const updateCoordinates = (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      };
+
+      window.addEventListener("mousemove", updateCoordinates);
+
+      const updatePosition = () => {
+        pos.x += (mouse.x - pos.x) * speed;
+        pos.y += (mouse.y - pos.y) * speed;
+        cursor.style.transform =
+          "translate3d(" + pos.x + "px ," + pos.y + "px, 0)";
+      };
+
+      function loop() {
+        updatePosition();
+        requestAnimationFrame(loop);
+      }
+
+      requestAnimationFrame(loop);
+
+      const cursorModifiers = document.querySelectorAll("[cursor-class]");
+
+      cursorModifiers.forEach((curosrModifier) => {
+        curosrModifier.addEventListener("mouseenter", function () {
+          const attribute = this.getAttribute("cursor-class");
+          cursor.classList.add(attribute);
+        });
+
+        curosrModifier.addEventListener("mouseleave", function () {
+          const attribute = this.getAttribute("cursor-class");
+          cursor.classList.remove(attribute);
+        });
+      });
+    </script>
+  </body>
+</html>
