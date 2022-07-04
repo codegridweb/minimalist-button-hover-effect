@@ -49,13 +49,13 @@
 
       const cursorModifiers = document.querySelectorAll("[cursor-class]");
 
-      cursorModifiers.forEach((curosrModifier) => {
-        curosrModifier.addEventListener("mouseenter", function () {
+      cursorModifiers.forEach((cursorModifier) => {
+        cursorModifier.addEventListener("mouseenter", function () {
           const attribute = this.getAttribute("cursor-class");
           cursor.classList.add(attribute);
         });
 
-        curosrModifier.addEventListener("mouseleave", function () {
+        cursorModifier.addEventListener("mouseleave", function () {
           const attribute = this.getAttribute("cursor-class");
           cursor.classList.remove(attribute);
         });
